@@ -1,2 +1,169 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"/><link rel="shortcut icon" href="/favicon.ico"/><meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="theme-color" content="#000000"/><meta name="description" content="Calculate how much equity you have dynamic chart. Pick
-    hand range combos and see how much you win vs. lose to a range of hands."/><link rel="canonical" href="http://handcombos.com/"/><meta name="robots" content="index, follow"/><link rel="manifest" href="/manifest.json"/><title>HandCombos.com - Poker Hand Range Calculator</title><script async src="https://www.googletagmanager.com/gtag/js?id=UA-141041595-1"></script><script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","UA-141041595-1")</script><link href="/static/css/2.8d7a3427.chunk.css" rel="stylesheet"><link href="/static/css/main.f921ac61.chunk.css" rel="stylesheet"></head><body><noscript>You need to enable JavaScript to run this app.</noscript><div id="root"></div><script>!function(e){function t(t){for(var n,l,i=t[0],a=t[1],c=t[2],p=0,s=[];p<i.length;p++)l=i[p],Object.prototype.hasOwnProperty.call(o,l)&&o[l]&&s.push(o[l][0]),o[l]=0;for(n in a)Object.prototype.hasOwnProperty.call(a,n)&&(e[n]=a[n]);for(f&&f(t);s.length;)s.shift()();return u.push.apply(u,c||[]),r()}function r(){for(var e,t=0;t<u.length;t++){for(var r=u[t],n=!0,i=1;i<r.length;i++){var a=r[i];0!==o[a]&&(n=!1)}n&&(u.splice(t--,1),e=l(l.s=r[0]))}return e}var n={},o={1:0},u=[];function l(t){if(n[t])return n[t].exports;var r=n[t]={i:t,l:!1,exports:{}};return e[t].call(r.exports,r,r.exports,l),r.l=!0,r.exports}l.m=e,l.c=n,l.d=function(e,t,r){l.o(e,t)||Object.defineProperty(e,t,{enumerable:!0,get:r})},l.r=function(e){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})},l.t=function(e,t){if(1&t&&(e=l(e)),8&t)return e;if(4&t&&"object"==typeof e&&e&&e.__esModule)return e;var r=Object.create(null);if(l.r(r),Object.defineProperty(r,"default",{enumerable:!0,value:e}),2&t&&"string"!=typeof e)for(var n in e)l.d(r,n,function(t){return e[t]}.bind(null,n));return r},l.n=function(e){var t=e&&e.__esModule?function(){return e.default}:function(){return e};return l.d(t,"a",t),t},l.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},l.p="/";var i=this.webpackJsonpequity_calculator_ui=this.webpackJsonpequity_calculator_ui||[],a=i.push.bind(i);i.push=t,i=i.slice();for(var c=0;c<i.length;c++)t(i[c]);var f=a;r()}([])</script><script src="/static/js/2.ab82d112.chunk.js"></script><script src="/static/js/main.9d2a84d0.chunk.js"></script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RNG</title>
+
+    <style>
+      html {
+        box-sizing: border-box;
+      }
+
+      *,
+      *:before,
+      *:after {
+        box-sizing: inherit;
+      }
+
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+        font-size: 16px;
+      }
+
+      .container {
+        width: 100%;
+        height: 100%;
+        padding: 5px;
+      }
+
+      .content {
+        background-color: #d3d3d3;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+      }
+
+      label {
+        cursor: pointer;
+        user-select: none;
+      }
+
+      button {
+        font-size: 1.05em;
+      }
+
+      input,
+      label,
+      span {
+        vertical-align: middle;
+        font-size: 1.2em;
+      }
+
+      #output {
+        width: 100px;
+        text-align: center;
+      }
+
+      .hide {
+        display: none;
+      }
+
+      .show {
+        display: initial;
+      }
+
+      #auto-interval-seconds-input {
+        width: 35px;
+        text-align: center;
+        margin-left: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="content">
+        <input id="output" type="text" disabled />
+        <button id="generate-button">Generate</button>
+        <div>
+          <input id="auto-generate-cb" type="checkbox" />
+          <label for="auto-generate-cb">Auto</label>
+          <input
+            class="hide"
+            id="auto-interval-seconds-input"
+            type="text"
+            maxlength="2"
+          />
+          <span class="hide" id="auto-interval-seconds-label">seconds</span>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      window.open('file:///C:/Users/Username/Desktop/rng.html', 'windowName', "menubar=no, location=no, scrollbars=no, status=no, height=150, width=275");
+
+      const autoIntervalSecondsInput = document.getElementById(
+        "auto-interval-seconds-input"
+      );
+      const autoIntervalSecondsLabel = document.getElementById(
+        "auto-interval-seconds-label"
+      );
+
+      let autoInterval = 0;
+      let autoIntervalRef;
+
+      function getRandomNumber(min, max) {
+        const minN = Math.ceil(min);
+        const maxN = Math.floor(max);
+        return Math.floor(Math.random() * (maxN - minN + 1)) + minN;
+      }
+
+      function displayRandomNumber() {
+        const randomNumber = getRandomNumber(1, 100);
+        document.getElementById("output").value = randomNumber;
+      }
+
+      function setAutoInterval(intervalSeconds) {
+        if (intervalSeconds) autoInterval = intervalSeconds * 1000;
+
+        if (autoInterval >= 1000) {
+          autoIntervalRef = setInterval(displayRandomNumber, autoInterval);
+        }
+      }
+
+      function handleAutoCheckboxChanged(event) {
+        const checked = event.target.checked;
+        if (checked) {
+          autoIntervalSecondsInput.classList = "show";
+          autoIntervalSecondsLabel.classList = "show";
+          setAutoInterval();
+        } else {
+          autoIntervalSecondsInput.classList = "hide";
+          autoIntervalSecondsLabel.classList = "hide";
+          clearInterval(autoIntervalRef);
+        }
+      }
+
+      function handleAutoIntervalChanged(event) {
+        const value = event.target.value;
+        const intervalSeconds = value.replace(/\D/, "");
+        event.target.value = intervalSeconds;
+        clearInterval(autoIntervalRef);
+        setAutoInterval(intervalSeconds);
+      }
+
+      // document
+      //   .getElementById("generate-button")
+      //   .addEventListener("click", displayRandomNumber);
+      document
+        .getElementById("generate-button")
+        .addEventListener("click", (e) => displayRandomNumber(e));
+      document
+        .getElementById("auto-generate-cb")
+        .addEventListener("change", (e) => handleAutoCheckboxChanged(e));
+      autoIntervalSecondsInput.addEventListener("keyup", (e) =>
+        handleAutoIntervalChanged(e)
+      );
+    </script>
+  </body>
+</html>
